@@ -1,19 +1,16 @@
-import java.io.*;
-import java.util.*;
-
 class Main {
-    public static int[] gugudan(int n) {
-        int [] Result = new int [9];
+    public static int[] gugudan(int n, int size) {
+        int [] Result = new int [size + 1];
         for(int i = 0; i < Result.length; i++) {
             Result[i] = (i + 1) * n;
         }
         return Result;
     }
 
-    public static void print(int []arr, int n) {
-        System.out.printf("%d단\n", n);
-        for(int j = 0; j < 9; j++){
-            System.out.printf("%d * %d = %d\n",n ,j+1, arr[j]);
+    public static void print(int []arr, int start, int end) {
+        System.out.printf("%d단\n", start);
+        for(int j = 0; j < end; j++){
+            System.out.printf("%d * %d = %d\n",start ,j+1, arr[j]);
         }
     }
 }
