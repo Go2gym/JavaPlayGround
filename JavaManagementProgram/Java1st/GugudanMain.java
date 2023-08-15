@@ -3,10 +3,10 @@ import java.util.*;
 
 class GugudanMain {
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine(),", ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(),", ");
 
-        //String arr[] = bf.readLine().split(", ");
+        //String arr[] = br.readLine().split(", ");
         int start = Integer.parseInt(st.nextToken());
         int end = Integer.parseInt(st.nextToken());
 
