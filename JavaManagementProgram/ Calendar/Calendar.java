@@ -11,77 +11,36 @@ public class Calendar {
     }
 
     public void makeCalendar(int month, String startDay) {
-        if (Max_Days[month - 1] == 28) {
-            for(int i = 0; i < 28 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if(i < Arrays.asList(startDays).indexOf(startDay)) {
-                    calendar[i] = "";
-                }
-                else {
-                    calendar[i] = Integer.toString(i - Arrays.asList(startDays).indexOf(startDay) + 1);
-                }
-            }
-        }
-        else if (Max_Days[month - 1] == 30) {
-            for(int i = 0; i < 30 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if(i < Arrays.asList(startDays).indexOf(startDay)) {
-                    calendar[i] = "";
-                }
-                else {
-                    calendar[i] = Integer.toString(i - Arrays.asList(startDays).indexOf(startDay) + 1);
-                }
-            }
-        }
-        else if (Max_Days[month - 1] == 31) {
-            for(int i = 0; i < 31 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if(i < Arrays.asList(startDays).indexOf(startDay)) {
-                    calendar[i] = "";
-                }
-                else {
-                    calendar[i] = Integer.toString(i - Arrays.asList(startDays).indexOf(startDay) + 1);
-                }
+        for (int i = 0; i < Max_Days[month - 1] + Arrays.asList(startDays).indexOf(startDay); i++) {
+            if (i < Arrays.asList(startDays).indexOf(startDay)) {
+                calendar[i] = "";
+            } else {
+                calendar[i] = Integer.toString(i - Arrays.asList(startDays).indexOf(startDay) + 1);
             }
         }
     }
 
     public void printCalendar(int year, int month, String startDay) {
         makeCalendar(month, startDay);
-        if (Max_Days[month - 1] == 28) {
-            System.out.printf("<<%4d년 %3d월>>\n", year, month);
-            System.out.println("SU MO TU WE TH FR SA");
-            System.out.println("--------------------");
-            for(int i = 0; i < 28 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if((i + 1) % 7 == 0)
-                    System.out.printf("%2s\n", calendar[i]);
-                else
-                    System.out.printf("%2s ", calendar[i]);
-            }
-        }
-        else if (Max_Days[month - 1] == 30) {
-            System.out.printf("<<%4d년 %3d월>>\n", year, month);
-            System.out.println("SU MO TU WE TH FR SA");
-            System.out.println("--------------------");
-            for(int i = 0; i < 30 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if((i + 1) % 7 == 0)
-                    System.out.printf("%2s\n", calendar[i]);
-                else
-                    System.out.printf("%2s ", i);
-            }
-        }
-        else if (Max_Days[month - 1] == 31) {
-            System.out.printf("<<%4d년 %3d월>>\n", year, month);
-            System.out.println("SU MO TU WE TH FR SA");
-            System.out.println("--------------------");
-            for(int i = 0; i < 31 + Arrays.asList(startDays).indexOf(startDay); i++) {
-                if((i + 1) % 7 == 0)
-                    System.out.printf("%2s\n", calendar[i]);
-                else
-                    System.out.printf("%2s ", calendar[i]);
-            }
+        printForm(year, month);
+
+        for (int i = 0; i < Max_Days[month - 1] + Arrays.asList(startDays).indexOf(startDay); i++) {
+            if ((i + 1) % 7 == 0)
+                System.out.printf("%2s\n", calendar[i]);
+            else
+                System.out.printf("%2s ", calendar[i]);
         }
     }
 
+    public int plusCnt() {
+        
+    }
     
-
+    public void printForm(int year, int month) {
+        System.out.printf("<<%4d년 %3d월>>\n", year, month);
+        System.out.println("SU MO TU WE TH FR SA");
+        System.out.println("--------------------");
+    }
     public static void main(String[] args) throws IOException {
         Prompt p = new Prompt();
 
