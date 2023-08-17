@@ -1,9 +1,16 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class Calendar {
-    public static void main(String[] args) {
-        System.out.println("일 월 화 수 목 금 토");
-        System.out.println("1  2  3  4  5  6  7");
-        System.out.println("8  9  10 11 12 13 14");
-        System.out.println("15 16 17 18 19 20 21");
-        System.out.println("22 23 24 25 26 27 28");
+    public static void main(String[] args) throws IOException {
+        int a, b;
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(bf.readLine());
+
+        a = Integer.parseInt(st.nextToken());
+        b = Integer.parseInt(st.nextToken());
+        System.out.printf("두 수의 합은 %d입니다.", a+b);
     }
 }
