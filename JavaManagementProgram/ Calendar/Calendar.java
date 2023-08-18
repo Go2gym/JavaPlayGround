@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Calendar {
     private final int[] Max_Days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    private final String[] startDays = {"SU", "MO", "WE", "TH", "FR", "SA"};
+    private final String[] startDays = {"SU", "MO", "TU", "WE", "TH", "FR", "SA"};
     private String [] calendar = new String[50];
     //몇일까지 있는지 출력
     public int maxDaysOfMonth(int month) {
@@ -30,10 +30,6 @@ public class Calendar {
             else
                 System.out.printf("%2s ", calendar[i]);
         }
-    }
-
-    public int plusCnt() {
-        
     }
     
     public void printForm(int year, int month) {

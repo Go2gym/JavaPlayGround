@@ -23,7 +23,7 @@ public class Prompt {
             System.out.print("MONTH> ");
             month = Integer.parseInt(bf.readLine());
 
-            System.out.println("시작하는 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
+            System.out.println("시작하는 요일을 입력하세요. (SU, MO, TU, WE, TH, FR, SA)");
             System.out.print("STARTDAY> ");
             startDay = bf.readLine();
             
