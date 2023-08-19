@@ -33,14 +33,16 @@ public class myCalendar {
     }
 
     public int parseDay(String week) {
-        if(week.equals("su")) return 0;
-        else if(week.equals("mo"))return 1;
-        else if(week.equals("tu"))return 2;
-        else if(week.equals("we"))return 3;
-        else if(week.equals("th"))return 4;
-        else if(week.equals("fr"))return 5;
-        else if(week.equals("sa"))return 6;
-        else return 0;
+        switch(week) {
+            case "su": return 0;
+            case "mo": return 1;
+            case "tu": return 2;
+            case "we": return 3;
+            case "th": return 4;
+            case "fr": return 5;
+            case "sa": return 6;
+            default: return 0;
+        }
     }
     
     public void printCalendar(int year, int month) {
