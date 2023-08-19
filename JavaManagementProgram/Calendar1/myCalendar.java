@@ -1,10 +1,33 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    //몇일까지 있는지 출력
+    
+    private HashMap <Date, String> planMap;
+
+    public myCalendar() {
+        planMap = new HashMap<Date, String>();
+    }
+    /*
+     * @param date ex: "2023-08-19"
+     * @param plan
+     */
+    public void registerPlan(String strDate, String plan) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        planMap.put(date, plan);
+    }
+
+    public String searchPlan(String strDate) throws ParseException{
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        String plan = planMap.get(date);
+
+        return plan;
+    }
+    
     public int maxDaysOfMonth(int month) {
         return Max_Days[month - 1];
     }
@@ -22,8 +45,8 @@ public class myCalendar {
     
     public void printCalendar(int year, int month) {
         System.out.printf("<<%d년 %d월>>\n", year, month);
-        System.out.println("SU MO TU WE TH FR SA");
-        System.out.println("--------------------");
+        System.out.println(" SU MO TU WE TH FR SA");
+        System.out.println(" --------------------");
 
         int weekday = getWeekDay(year, month, 1);
 
@@ -86,5 +109,12 @@ public class myCalendar {
 
         int weekday = (count + STANDARDWEEKDAY) % 7;
         return weekday;
+    }
+
+    public static void main(String[] args) throws ParseException{
+        myCalendar cal = new myCalendar();
+
+        cal.registerPlan("2023-08-19", "Let's eat beef!");
+        System.out.println(cal.searchPlan("2023-08-19").equals("Let's eat beef!"));
     }
 }
