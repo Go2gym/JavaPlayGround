@@ -28,14 +28,14 @@ public class myCalendar {
         int weekday = getWeekDay(year, month, 1);
 
         for(int i = 0; i < weekday; i++) {
-            System.out.print("     ");
+            System.out.print("   ");
         }
 
         int maxDay = getMaxDaysOfMonth(year, month);
         int count = 7 - weekday;
         int delim = (count < 7) ? count : 0;
 
-        for(int i = count; i <= count; i++) {
+        for(int i = 1; i <= count; i++) {
             System.out.printf("%3d", i);
         }
         System.out.println();
@@ -68,7 +68,7 @@ public class myCalendar {
 
     private int getWeekDay(int year, int month, int day) {
         int syear = 1970;
-        final int STANDARDWEEKDAY = 3;
+        final int STANDARDWEEKDAY = 4;
 
         int count = 0;
 
