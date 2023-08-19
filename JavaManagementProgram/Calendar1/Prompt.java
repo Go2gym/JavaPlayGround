@@ -1,7 +1,7 @@
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
-import java.util.Calendar;
+
 
 public class Prompt {
     public void runPrompt() throws IOException, ParseException {
@@ -36,19 +36,18 @@ public class Prompt {
         cal.registerPlan(date, text);
     }
 
-    public static void cmdSearch(BufferedReader bf, myCalendar cal) {
+    public static void cmdSearch(BufferedReader bf, myCalendar cal) throws IOException {
         System.out.println("[일정 검색]");
         System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
         
-        String plan="";
-        try {
-            String date = bf.readLine();
-            plan = cal.searchPlan(date);
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
-            System.err.println("일정 검색 중 오류가 발생했습니다.");
+        String date = bf.readLine();
+        PlanItem plan; 
+        plan = cal.searchPlan(date);
+        if(plan != null) {
+            System.out.println(plan.detail);
+        } else {
+            System.out.println("일정이 없습니다.");
         }
-        System.out.println(plan);
     }
 
     public static void showCal(BufferedReader bf, myCalendar cal) throws IOException{
