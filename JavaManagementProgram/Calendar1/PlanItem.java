@@ -3,9 +3,9 @@ import java.util.Date;
 
 //31강 25
 public class PlanItem {
-    public Date planDate;
-    public String detail;
-    public String peoples = "";
+    private Date planDate;
+    private String detail;
+    private String peoples = "";
 
     public static Date getDateFromString(String strDate) {
         Date date = null;
@@ -15,6 +15,10 @@ public class PlanItem {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public PlanItem() {
+
     }
 
     public PlanItem(String date, String detail) {
@@ -34,4 +38,13 @@ public class PlanItem {
     public Date getDate() {
         return planDate;
     }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public String getPeople() {
+        return peoples;
+    }
+    
 }

@@ -7,10 +7,9 @@ public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     
-    private HashMap <Date, PlanItem> planMap;
+    private HashMap <Date, List<PlanItem>> planMap = new HashMap<>();
 
     public myCalendar() {
-        planMap = new HashMap<Date, PlanItem>();
     }
     /*
      * @param date ex: "2023-08-19"
@@ -18,10 +17,12 @@ public class myCalendar {
      */
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
-        planMap.put(P.getDate(), P);
+        List<PlanItem> planItems = planMap.getOrDefault(P.getDate(), new ArrayList<>());
+        planItems.add(P);
+        planMap.put(P.getDate(), planItems);
     }
 
-    public PlanItem searchPlan(String strDate) {
+    public List<PlanItem> searchPlan(String strDate) {
         Date date = PlanItem.getDateFromString(strDate);
         return planMap.get(date);
     }
