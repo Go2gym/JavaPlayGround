@@ -82,7 +82,6 @@ public class Prompt {
 
     public static void main(String[] args) throws IOException, ParseException {
         Prompt p = new Prompt();
-
         p.runPrompt();
     }
 }

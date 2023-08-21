@@ -9,12 +9,6 @@ public class myCalendar {
     
     private HashMap <Date, List<PlanItem>> planMap = new HashMap<>();
 
-    public myCalendar() {
-    }
-    /*
-     * @param date ex: "2023-08-19"
-     * @param plan
-     */
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
         List<PlanItem> planItems = planMap.getOrDefault(P.getDate(), new ArrayList<>());
