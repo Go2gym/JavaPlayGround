@@ -7,6 +7,7 @@ public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static final String FILE_PATH = "/workspaces/JavaPlayGround/JavaManagementProgram/Calendar1";
+    private static final String SAVE_FILE = "calendar.dat";
     private HashMap <Date, List<PlanItem>> planMap = new HashMap<>();
 
     public void registerPlan(String strDate, String plan) {
@@ -15,13 +16,18 @@ public class myCalendar {
         planItems.add(P);
         planMap.put(P.getDate(), planItems);
 
+        File f = new File(SAVE_FILE);
+        
         try {
-            File f = new File(FILE_PATH);
-            FileWriter fileWriter = new FileWriter(f, true);
-            
+            FileWriter fw = new FileWriter(f);
+            for (PlanItem planItem : planItems) {
+                fw.write(planItem.getDetail());
+                fw.close();
+            }            
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public List<PlanItem> searchPlan(String strDate) {

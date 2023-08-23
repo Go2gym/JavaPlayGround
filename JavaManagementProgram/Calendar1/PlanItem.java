@@ -46,5 +46,4 @@ public class PlanItem {
     public String getPeople() {
         return peoples;
     }
-    
 }
