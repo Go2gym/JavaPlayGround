@@ -8,13 +8,13 @@ public class myCalendar {
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static final String FILE_PATH = "/workspaces/JavaPlayGround/JavaManagementProgram/Calendar1";
     private static final String SAVE_FILE = "calendar.dat";
-    private HashMap <Date, List<PlanItem>> planMap = new HashMap<>();
+    
 
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
-        List<PlanItem> planItems = planMap.getOrDefault(P.getDate(), new ArrayList<>());
+        List<PlanItem> planItems = P.getPlanMapDetail(strDate, plan);
         planItems.add(P);
-        planMap.put(P.getDate(), planItems);
+        P.getPlanMap().put(P.getDate(), planItems);
 
         File f = new File(SAVE_FILE);
         
