@@ -21,14 +21,20 @@ public class myCalendar {
         try {
             if(f.exists()) {
                 FileWriter fw = new FileWriter(SAVE_FILE, false);
-            } else {
+                for (PlanItem planItem : planItems) {
+                    fw.write(planItem.getDetail());
+                } 
+                fw.close();
+            }
+            else {
                 FileWriter fw = new FileWriter(f);           
                 for (PlanItem planItem : planItems) {
                 fw.write(planItem.getDetail());
                 fw.close();
+                }
             }
-            }            
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
