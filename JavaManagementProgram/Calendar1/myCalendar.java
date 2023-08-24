@@ -19,10 +19,14 @@ public class myCalendar {
         File f = new File(SAVE_FILE);
         
         try {
-            FileWriter fw = new FileWriter(f);
-            for (PlanItem planItem : planItems) {
+            if(f.exists()) {
+                FileWriter fw = new FileWriter(SAVE_FILE, false);
+            } else {
+                FileWriter fw = new FileWriter(f);           
+                for (PlanItem planItem : planItems) {
                 fw.write(planItem.getDetail());
                 fw.close();
+            }
             }            
         } catch (Exception e) {
             e.printStackTrace();
