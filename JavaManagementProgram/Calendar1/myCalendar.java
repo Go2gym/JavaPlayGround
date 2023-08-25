@@ -13,11 +13,7 @@ public class myCalendar {
 
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
-<<<<<<< HEAD
         List<PlanItem> planItems = planMap.getOrDefault(P.getDate(), new ArrayList<PlanItem>());
-=======
-        List<PlanItem> planItems = planMap.getOrDefault(strDate, new ArrayList<>());
->>>>>>> c9ce48cf48776e154c553b8db25df50948e743e6
         planItems.add(P);
         planMap.put(P.getDate(), planItems);
 
