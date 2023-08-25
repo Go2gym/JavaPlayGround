@@ -6,15 +6,16 @@ import java.util.*;
 public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private HashMap <Date, List<PlanItem>> planMap = new HashMap<Date, List<PlanItem>>();
     private static final String FILE_PATH = "/workspaces/JavaPlayGround/JavaManagementProgram/Calendar1";
     private static final String SAVE_FILE = "calendar.dat";
     
 
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
-        List<PlanItem> planItems = P.getPlanMapDetail(strDate, plan);
+        List<PlanItem> planItems = planMap.getOrDefault(strDate, new ArrayList<>());
         planItems.add(P);
-        P.getPlanMap().put(P.getDate(), planItems);
+        planMap.put(P.getDate(), planItems);
 
         File f = new File(SAVE_FILE);
         
@@ -43,6 +44,7 @@ public class myCalendar {
     public List<PlanItem> searchPlan(String strDate) {
         Date date = PlanItem.getDateFromString(strDate);
         return planMap.get(date);
+        //planMap.get(date);
     }
     
     public int maxDaysOfMonth(int month) {
@@ -130,10 +132,9 @@ public class myCalendar {
         return weekday;
     }
 
-    public static void main(String[] args) throws ParseException{
+    public static void main(String[] args) {
         myCalendar cal = new myCalendar();
 
         cal.registerPlan("2023-08-19", "Let's eat beef!");
-        System.out.println(cal.searchPlan("2023-08-19").equals("Let's eat beef!"));
     }
 }
