@@ -6,7 +6,7 @@ import java.util.List;
 
 //31강 25
 public class PlanItem {
-    private HashMap <Date, List<PlanItem>> planMap = new HashMap<Date, List<PlanItem>>();
+    
     private Date planDate;
     private String detail;
     private String peoples = "";
@@ -19,18 +19,6 @@ public class PlanItem {
             e.printStackTrace();
         }
         return date;
-    }
-
-    public HashMap <Date, List<PlanItem>> getPlanMap() {
-        return this.planMap;
-    }
-
-    public List<PlanItem> getPlanMapDetail(String date, String plan) {
-        return planMap.getOrDefault(date, new ArrayList<>());
-    }
-
-    public void addPlan(String strDate, String plan) {
-        this.planMap.put(planDate, plan);
     }
 
     public PlanItem(String date, String detail) {
