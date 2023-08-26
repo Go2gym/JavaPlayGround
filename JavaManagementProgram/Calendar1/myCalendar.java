@@ -1,15 +1,43 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    private HashMap <Date, List<PlanItem>> planMap = new HashMap<Date, List<PlanItem>>();
+    private HashMap <Date, List<PlanItem>> planMap;
     private static final String FILE_PATH = "/workspaces/JavaPlayGround/JavaManagementProgram/Calendar1";
     private static final String SAVE_FILE = "calendar.dat";
     
+    public myCalendar() throws ParseException {
+        planMap = new HashMap<Date, List<PlanItem>>();
+        File f = new File(SAVE_FILE);
+        if(!f.exists()) {
+            return;
+        }
+
+        try {
+            Scanner s = new Scanner(f);
+            while(s.hasNext()) {
+                String date = s.next();
+                String detail = s.next();
+                
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date strToDate = formatter.parse(date);
+                PlanItem P = new PlanItem(strToDate, detail);
+                
+
+                List<PlanItem> planItems = planMap.getOrDefault(strToDate, new ArrayList<>());
+                planItems.add(P);
+                planMap.put(P.getDate(), planItems);
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void registerPlan(String strDate, String plan) {
         PlanItem P = new PlanItem(strDate, plan);
@@ -21,9 +49,10 @@ public class myCalendar {
         
         try {
             if(f.exists()) {
-                FileWriter fw = new FileWriter(SAVE_FILE, false);
+                FileWriter fw = new FileWriter(SAVE_FILE, true);
+                String date = P.getDate().toString();
                 for (PlanItem planItem : planItems) {
-                    fw.write(planItem.getDetail());
+                    fw.write(planItem.saveString());
                 } 
                 fw.close();
             }
@@ -134,7 +163,5 @@ public class myCalendar {
 
     public static void main(String[] args) {
         myCalendar cal = new myCalendar();
-
-        cal.registerPlan("2023-08-19", "Let's eat beef!");
     }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 //31강 25
 public class PlanItem {
-    
     private Date planDate;
     private String detail;
     private String peoples = "";
@@ -45,5 +44,11 @@ public class PlanItem {
 
     public String getPeople() {
         return peoples;
+    }
+
+    public String saveString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String sdate = formatter.format(planDate);
+        return sdate + ", " + detail + "\n";
     }
 }
