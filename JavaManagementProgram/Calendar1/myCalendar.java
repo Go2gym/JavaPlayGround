@@ -7,59 +7,64 @@ import java.util.*;
 public class myCalendar {
     private final int[] Max_Days = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private final int[] LEAP_Max_Days = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    private HashMap <Date, List<PlanItem>> planMap;
+    private HashMap <Date, List<String>> planMap;
     private static final String FILE_PATH = "/workspaces/JavaPlayGround/JavaManagementProgram/Calendar1";
     private static final String SAVE_FILE = "calendar.dat";
     
-    public myCalendar() throws ParseException {
-        planMap = new HashMap<Date, List<PlanItem>>();
+    public myCalendar() throws ParseException, IOException {
+        planMap = new HashMap<Date, List<String>>();
         File f = new File(SAVE_FILE);
         if(!f.exists()) {
             return;
         }
 
         try {
-            Scanner s = new Scanner(f);
-            while(s.hasNext()) {
-                String date = s.next();
-                String detail = s.next();
-                
+            //Scanner s = new Scanner(f);
+            FileReader fr = new FileReader(SAVE_FILE);
+            BufferedReader br = new BufferedReader(fr);
+            String str = "";
+            while((str = br.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(str);
+                String date = st.nextToken(",");
+                String detail = st.nextToken(",");
+                System.out.println(date + " " + detail);
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date strToDate = formatter.parse(date);
-                PlanItem P = new PlanItem(strToDate, detail);
                 
-
-                List<PlanItem> planItems = planMap.getOrDefault(strToDate, new ArrayList<>());
-                planItems.add(P);
-                planMap.put(P.getDate(), planItems);
+                List<String> planItems = planMap.getOrDefault(strToDate, new ArrayList<>());
+                planItems.add(detail);
+                planMap.put(strToDate, planItems);
             }
-            s.close();
+            //s.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     public void registerPlan(String strDate, String plan) {
-        PlanItem P = new PlanItem(strDate, plan);
-        List<PlanItem> planItems = planMap.getOrDefault(P.getDate(), new ArrayList<PlanItem>());
-        planItems.add(P);
-        planMap.put(P.getDate(), planItems);
+        //PlanItem P = new PlanItem(strDate);
+        Date date = PlanItem.getDateFromString(strDate);
+        List<String> planItems = planMap.getOrDefault(date, new ArrayList<String>());
+        planItems.add(plan);
+        planMap.put(date, planItems);
 
         File f = new File(SAVE_FILE);
         
         try {
             if(f.exists()) {
                 FileWriter fw = new FileWriter(SAVE_FILE, true);
-                String date = P.getDate().toString();
-                for (PlanItem planItem : planItems) {
-                    fw.write(planItem.saveString());
-                } 
+                fw.write(strDate + "," + plan + "\n");
                 fw.close();
+                /*FileWriter fw = new FileWriter(SAVE_FILE, true);
+                for (String planItem : planItems) {
+                    fw.write(strDate + ","+ planItem + "\n");
+                } 
+                fw.close();*/
             }
             else {
                 FileWriter fw = new FileWriter(f);           
-                for (PlanItem planItem : planItems) {
-                fw.write(planItem.getDetail());
+                for (String planItem : planItems) {
+                fw.write(planItem);
                 fw.close();
                 }
             }
@@ -70,7 +75,7 @@ public class myCalendar {
 
     }
 
-    public List<PlanItem> searchPlan(String strDate) {
+    public List<String> searchPlan(String strDate) {
         Date date = PlanItem.getDateFromString(strDate);
         return planMap.get(date);
         //planMap.get(date);
@@ -159,9 +164,5 @@ public class myCalendar {
 
         int weekday = (count + STANDARDWEEKDAY) % 7;
         return weekday;
-    }
-
-    public static void main(String[] args) {
-        myCalendar cal = new myCalendar();
     }
 }

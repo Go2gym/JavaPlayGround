@@ -41,10 +41,12 @@ public class Prompt {
         System.out.println("날짜를 입력해주세요 (yyyy-MM-dd)");
         
         String date = bf.readLine();
-        List<PlanItem> plans = cal.searchPlan(date);
+        List<String> plans = cal.searchPlan(date);
+        int i = 1;
         if(plans != null) {
-            for (PlanItem plan : plans) {
-                System.out.println(plan.getDetail());
+            for (String plan : plans) {
+                System.out.printf("%d. %s\n", i, plan);
+                i++;
             }
         } else {
             System.out.println("일정이 없습니다.");
