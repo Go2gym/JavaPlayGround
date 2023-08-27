@@ -27,7 +27,6 @@ public class myCalendar {
                 StringTokenizer st = new StringTokenizer(str);
                 String date = st.nextToken(",");
                 String detail = st.nextToken(",");
-                System.out.println(date + " " + detail);
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date strToDate = formatter.parse(date);
                 
